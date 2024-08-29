@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
-    <title>Document</title>
+    <title>Blog</title>
 </head>
 <body>
   <style>  
@@ -30,7 +30,7 @@ body {
   min-height: 100vh;
   margin: 0;
   font-family: 'Lora', serif;
-  background-image: url("image/fondo.jpg") ;
+  background-image: url("/static/image/fondo.jpg") ;
   background-size: cover;
 }
 .box{
@@ -360,7 +360,7 @@ img {
     <article class="media">
         <div class="media-left">
             <figure class="image is-96x96">
-              <img id="imageZoomClick" class="is-rounded" src="/image/l.png" alt="Image" style="cursor: zoom-in;" />
+              <img id="imageZoomClick" class="is-rounded" src="/static//image/l.png" alt="Image" style="cursor: zoom-in;" />
             </figure>
         </div>
         <div id="imageModal" class="image-modal">
@@ -429,17 +429,17 @@ img {
       <div class="images">
         <div id="mySidenav" class="sidenav"></div>
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a class="image-link" href="#">
-          <div class="image" data-label="Home"><img src="/image/Home.png" alt=""></div>
+        <a class="image-link" href="home.html">
+          <div class="image" data-label="Home"><img src="/static//image/Home.png" alt=""></div>
         </a>
-        <a class="image-link" href="#">
-          <div class="image" data-label="About"><img src="/image/About.png" href="about.html"></div>
+        <a class="image-link" href="about.html">
+          <div class="image" data-label="About"><img src="/static//image/About.png" alt=""></div>
         </a>
-        <a class="image-link" href="#">
-          <div class="image" data-label="Service"><img src="/image/service.jpg" alt=""></div>
+        <a class="image-link" href="services.html">
+          <div class="image" data-label="Service"><img src="/static//image/service.jpg" alt=""></div>
         </a>
-        <a class="image-link" href="#">
-          <div class="image" data-label="Team"><img src="/image/team.jpg" alt=""></div>
+        <a class="image-link" href="team.html">
+          <div class="image" data-label="Team"><img src="/static//image/team.jpg" alt=""></div>
         </a>
       </div>
     </div>
