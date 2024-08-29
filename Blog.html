@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
+    <title>Document</title>
+</head>
+<body>
+  <style>  
+
+/* Mixins para dispositivos */
+@mixin sp-layout {
+  @media screen and (max-width: 750px) {
+    @content;
+  }
+}
+
+@mixin pc-layout {
+  @media screen and (min-width: 751px) {
+    @content;
+  }
+}
+
+/* Estilos generales */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  font-family: 'Lora', serif;
+  background-image: url("image/fondo.jpg") ;
+  background-size: cover;
+}
+.box{
+  background-color:rgba(37, 241, 231, 0.363);
+  color: rgb(0, 0, 0);
+  font-family: Arial, Helvetica, sans-serif;
+}
+p {
+  margin: 0;
+}
+/* Estilo para la imagen en el box */
+.media-left .image {
+    margin-right: 20px;
+}
+
+ a.level-item {
+ margin-right: 10px;
+color: #3273dc;
+transition: color 0.3s ease;
+}
+
+a.level-item:hover {
+color: #ff3860;
+}
+/* Toggle del menú burger */
+#burger-toggle {
+  position: absolute;
+  appearance: none;
+  opacity: 0;
+}
+
+#burger-toggle:checked ~ .menu {
+  opacity: 1;
+  visibility: visible;
+}
+
+#burger-toggle:checked ~ .menu .menu-nav-link span div,
+#burger-toggle:checked ~ .menu img,
+#burger-toggle:checked ~ .menu .title p {
+  transform: translateY(0);
+  transition: 1.2s 0.1s cubic-bezier(0.35, 0, 0.07, 1);
+}
+
+
+#burger-toggle:checked ~ .burger-menu .line::after {
+  transform: translateX(0);
+}
+
+#burger-toggle:checked ~ .burger-menu .line:nth-child(1) {
+  transform: translateY(calc(var(--burger-menu-radius) / 5)) rotate(45deg);
+}
+
+#burger-toggle:checked ~ .burger-menu .line:nth-child(2) {
+  transform: scaleX(0);
+}
+
+#burger-toggle:checked ~ .burger-menu .line:nth-child(3) {
+  transform: translateY(calc(var(--burger-menu-radius) / -5)) rotate(-45deg);
+}
+
+/* Menú burger */
+.burger-menu {
+  --burger-menu-radius: 4em;
+  position: fixed;
+  top: 5vh;
+  left: 5vw;
+  z-index: 100;
+  width: var(--burger-menu-radius);
+  height: var(--burger-menu-radius);
+  outline: none;
+  cursor: pointer;
+  background:rgba(245, 245, 245, 0.37);
+  border-radius: 50%;
+}
+
+.burger-menu .line {
+  position: absolute;
+  left: 25%;
+  width: 50%;
+  height: 3px;
+  background: hsla(0, 0%, 7%, 0.678);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: 0.5s;
+}
+
+.burger-menu .line:nth-child(1) {
+  top: 30%;
+}
+
+.burger-menu .line:nth-child(2) {
+  top: 50%;
+}
+
+.burger-menu .line:nth-child(3) {
+  top: 70%;
+}
+
+.burger-menu .line::after {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--primary-color-darker);
+  transform: translateX(-100%);
+  transition: 0.25s;
+  background: #ffffffc4;
+}
+
+.burger-menu .line:nth-child(2)::after {
+  transition-delay: 0.1s;
+}
+
+.burger-menu .line:nth-child(3)::after {
+  transition-delay: 0.2s;
+}
+
+.burger-menu:hover .line::after {
+  transform: translateX(0);
+}
+
+/* Menú desplegable */
+.menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #1a1e23c9;
+  opacity: 0;
+  overflow-x: hidden;
+  visibility: hidden;
+  transition: 0.3s;
+}
+
+.menu-nav {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  list-style-type: none;
+}
+
+.menu-nav-item {
+  flex: 1;
+}
+
+.menu-nav-link {
+  position: relative;
+  display: inline-flex;
+  font-size: 2rem;
+  color: white;
+  text-decoration: none;
+  padding: 10px 20px;
+  transition: background 0.3s ease;
+}
+.menu-nav-link:hover {
+background: #fcfcfc63;
+border-radius: 5px;
+        }
+.menu-nav-link span {
+  overflow: hidden;
+}
+
+.menu-nav-link span div {
+  transform: translateY(102%);
+}
+
+.menu-nav-link::after {
+  position: absolute;
+  content: "";
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--primary-color);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.5s;
+  background: rgb(251, 255, 5);
+}
+
+.menu-nav-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+  background: #3273dc;
+}
+
+/* Galería de imágenes */
+.gallery {
+  margin-top: 60px;
+  text-align: center;
+}
+
+.title {
+  font-size: 24px;
+  color: white;
+  overflow: hidden;
+}
+
+.title p {
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transform: translateY(102%);
+}
+
+.images {
+  margin-top: 36px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.image-link {
+  width: 15vw;
+  margin: 0 12px;
+  overflow: hidden;
+}
+
+@include sp-layout {
+  .image-link {
+    width: 40vw;
+    margin: 0 12px 12px 0;
+  }
+}
+
+.image-link .image {
+  position: relative;
+  transition: 0.6s;
+  margin-top: 36px;
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.image-link .image::before {
+  position: absolute;
+  content: attr(data-label);
+  top: 0;
+  left: 0;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  color: white;
+  background: rgba(0, 0, 0, 0.295);
+  opacity: 0;
+  transition: 0.4s;
+  
+}
+
+.image-link:hover .image {
+  transform: scale(1.2);
+  background-size: center;
+  border-radius: 102px;
+}
+
+.image-link:hover .image::before {
+  opacity: 1;
+  border-radius: 102px;
+}
+
+
+img {
+         height: 550px;
+          width: 100%;
+          object-fit: cover;
+          border-radius: 1222px;
+}
+
+.image-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9); /* Fondo opaco */
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    
+    max-width: 700px; /* Tamaño máximo de la imagen */
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+@keyframes zoom {
+    from {transform: scale(0);}
+    to {transform: scale(1);}
+}
+
+.modal-close {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+    --bulma-delete-color:var(--bulma-delete-color);
+}
+
+.modal-close:hover,
+.modal-close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+</style>
+
+<div class="box">
+    <article class="media">
+        <div class="media-left">
+            <figure class="image is-96x96">
+              <img id="imageZoomClick" class="is-rounded" src="/image/l.png" alt="Image" style="cursor: zoom-in;" />
+            </figure>
+        </div>
+        <div id="imageModal" class="image-modal">
+          <span id="modalClose" class="modal-close">&times;</span>
+          <img class="modal-content" id="modalImage">
+      </div>
+        <div class="media-content">
+            <div class="content">
+                <p>
+                    <strong style="color: rgb(0, 0, 0);">Juan Barrios</strong> <small>IG:@juandbarrios_    &  </small> <small>Git:<a style="color: rgb(7, 247, 255);" href="https://acortar.link/Ajf4nX">@JuanCrakxer </a></small>
+                    <br />
+                    <li>👋 Hi, I’m Juan Barrios</li>
+                    <li>👀 I’m interested in videogames, Web development & AI</li>
+                    <li> 🌱 I’m currently learning courses in platzi(python,git & github, html and js)</li>
+                    <li> 📫 How to reach me to my contacts: <a style="color: rgb(210, 255, 7);"href="mailto:juandy072900@gmail.com">juandy072900@gmail.com</a></li>
+                </p>
+            </div>
+            <nav class="level is-mobile">
+                <div class="level-left">
+                    <a class="level-item" aria-label="reply">
+                        <span class="icon is-small">
+                            <i class="fas fa-reply" aria-hidden="true"></i>
+                        </span>
+                    </a>
+                    <a class="level-item" aria-label="retweet">
+                        <span class="icon is-small">
+                            <i class="fas fa-retweet" aria-hidden="true"></i>
+                        </span>
+                    </a>
+                    <a class="level-item" aria-label="like">
+                        <span class="icon is-small">
+                            <i class="fas fa-heart" aria-hidden="true"></i>
+                        </span>
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </article>
+</div>
+<input type="checkbox" id="burger-toggle">
+<label for="burger-toggle" class="burger-menu">
+  <div class="line"></div>
+  <div class="line"></div>
+  <div class="line"></div>
+</label>
+<div class="menu">
+  <div class="menu-inner">
+    <ul class="menu-nav">
+      <li class="menu-nav-item"><a class="menu-nav-link" href="#"><span>
+            <div>Home</div>
+          </span></a></li>
+      <li class="menu-nav-item"><a class="menu-nav-link" href="#"><span>
+            <div>About</div>
+          </span></a></li>
+      <li class="menu-nav-item"><a class="menu-nav-link" href="#"><span>
+            <div>Service</div>
+          </span></a></li>
+      <li class="menu-nav-item"><a class="menu-nav-link" href="#"><span>
+            <div>Team</div>
+          </span></a></li>
+    </ul>
+    <div class="gallery">
+      <div class="title">
+        <p>Presiona para avanzar</p>
+      </div>
+      <div class="images">
+        <div id="mySidenav" class="sidenav"></div>
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a class="image-link" href="#">
+          <div class="image" data-label="Home"><img src="/image/Home.png" alt=""></div>
+        </a>
+        <a class="image-link" href="#">
+          <div class="image" data-label="About"><img src="/image/About.png" href="about.html"></div>
+        </a>
+        <a class="image-link" href="#">
+          <div class="image" data-label="Service"><img src="/image/service.jpg" alt=""></div>
+        </a>
+        <a class="image-link" href="#">
+          <div class="image" data-label="Team"><img src="/image/team.jpg" alt=""></div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const imageZoomClick = document.getElementById('imageZoomClick');
+  const modal = document.getElementById('imageModal');
+  const modalImg = document.getElementById('modalImage');
+  const modalClose = document.getElementById('modalClose');
+
+  imageZoomClick.addEventListener('click', function() {
+      modal.style.display = 'block';
+      modalImg.src = this.src;
+  });
+
+  modalClose.addEventListener('click', function() {
+      modal.style.display = 'none';
+  });
+
+  modal.addEventListener('click', function(event) {
+      if (event.target === modal) {
+          modal.style.display = 'none';
+      }
+  });
+
+  function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+    document.getElementById("main").style.marginLeft = "250px";
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("main").style.marginLeft= "0";
+}
+</script>
+</body>
+</html>
