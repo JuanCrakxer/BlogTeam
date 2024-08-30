@@ -409,17 +409,17 @@ img {
 <div class="menu">
   <div class="menu-inner">
     <ul class="menu-nav">
-      <li class="menu-nav-item"><a class="menu-nav-link" href="#"><span>
-            <div>Home</div>
+      <li class="menu-nav-item"><a class="menu-nav-link" href="{{ url_for('blog') }}"><span>
+            <div>Blog</div>
           </span></a></li>
-      <li class="menu-nav-item"><a class="menu-nav-link" href="#"><span>
-            <div>About</div>
+      <li class="menu-nav-item"><a class="menu-nav-link" href="{{ url_for('gallery') }}"><span>
+            <div>Gallery</div>
           </span></a></li>
-      <li class="menu-nav-item"><a class="menu-nav-link" href="#"><span>
-            <div>Service</div>
+      <li class="menu-nav-item"><a class="menu-nav-link" href="{{ url_for('contacts') }}"><span>
+            <div>Contacts</div>
           </span></a></li>
-      <li class="menu-nav-item"><a class="menu-nav-link" href="#"><span>
-            <div>Team</div>
+      <li class="menu-nav-item"><a class="menu-nav-link" href="{{ url_for('game') }}"><span>
+            <div>Game</div>
           </span></a></li>
     </ul>
     <div class="gallery">
@@ -429,16 +429,16 @@ img {
       <div class="images">
         <div id="mySidenav" class="sidenav"></div>
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a class="image-link" href="home.html">
+        <a class="image-link" href="{{ url_for('home') }}">
           <div class="image" data-label="Home"><img src="/static//image/Home.png" alt=""></div>
         </a>
-        <a class="image-link" href="about.html">
+        <a class="image-link" href="{{ url_for('about') }}">
           <div class="image" data-label="About"><img src="/static//image/About.png" alt=""></div>
         </a>
-        <a class="image-link" href="services.html">
+        <a class="image-link" href="{{ url_for('services') }}">
           <div class="image" data-label="Service"><img src="/static//image/service.jpg" alt=""></div>
         </a>
-        <a class="image-link" href="team.html">
+        <a class="image-link" href="{{ url_for('team') }}">
           <div class="image" data-label="Team"><img src="/static//image/team.jpg" alt=""></div>
         </a>
       </div>

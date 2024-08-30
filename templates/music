@@ -1,0 +1,198 @@
+body {
+        font-family: 'Poppins', sans-serif;
+        height: 100vh;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-image: url('/static/image/fondo_home.jpg');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+    }
+
+    #card {
+        display: flex;
+        justify-content: center;
+        align-items: stretch;
+        border-radius: 20px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+        overflow: hidden;
+        background-color: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(10px);
+        transition: transform 0.3s ease-in-out;
+    }
+
+    #card:hover {
+        transform: scale(1.05);
+        backdrop-filter: none;
+    }
+
+    #display {
+        width: 60%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 1em;
+        background: linear-gradient(135deg, rgba(159, 157, 255, 0.6) 30%, rgba(233, 233, 233, 0.3) 100%);
+        backdrop-filter: blur(10px);
+    }
+
+    #header h1 {
+        font-size: 1.8em;
+        margin: 0;
+        color: #333;
+    }
+
+    #header p {
+        font-size: 1.2em;
+        color: #666;
+        margin-top: 0.5em;
+    }
+
+    #art {
+        height: 200px;
+        width: 200px;
+        border-radius: 10px;
+        margin: 1em 0;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+        transition: box-shadow 0.3s ease-in-out;
+    }
+
+    #art:hover {
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+    }
+
+    #audio {
+        width: 100%;
+        margin-top: 1em;
+    }
+
+    #list {
+        width: 40%;
+        display: flex;
+        flex-direction: column;
+        background: #ffffff;
+    }
+
+    .item {
+        padding: 1em;
+        background: #fff;
+        border-bottom: 1px solid #ddd;
+        transition: background 0.3s ease, padding-left 0.3s ease;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .item h3 {
+        margin: 0;
+        font-size: 1.1em;
+        color: #333;
+    }
+
+    .item p {
+        margin: 0;
+        font-size: 0.9em;
+        color: #666;
+    }
+
+    .item:hover {
+        cursor: pointer;
+        background: rgba(159, 157, 255, 0.1);
+        padding-left: 1.2em;
+    }
+
+    .item.is-active {
+        background: rgba(159, 157, 255, 0.2);
+        border-left: 4px solid rgba(159, 157, 255, 0.6);
+        padding-left: 1.5em;
+    }
+
+    .item.is-active h3,
+    .item.is-active p {
+        color: #333;
+    }
+</style>
+<body>
+    <div id='card'>
+        <div id='display'>
+          <div id='header'>
+            <h1 id='title'></h1>
+            <p>
+              <span id='song_title'></span>
+            </p>
+          </div>
+          <div id='image'>
+            <img src='' alt='' id='art' />
+          </div>
+          <audio controls src='' id='audio'>
+          </audio>
+        </div>
+        <div id='list'>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const src = [
+                ["Kris R", "Las piponas", "", "/static/image/laspiponas.png"],
+                ["Eladio Carrion", "TQMQA (Sol Maria)", "", "/static/image/solmaria.jfif"],
+                ["Trueno", "Real Gangsta Love", "", "/static/image/Gangsta_love.jfif"],
+                ["Mora", "Media luna", "", "/static/image/Media_luna.jfif"],
+                ["Dillom", "Ciudad de la Paz", "", "/static/image/dillom.jfif"]
+                
+            ];
+            
+            for (x = 0; x < src.length; x++) {
+                var s = src[x];
+                var number = parseInt(x) + 1;
+                var artist = document.createTextNode(s[0]);
+                var track_name = document.createTextNode(s[1]);
+                
+                var listItem = document.createElement('div');
+                var artist_text = document.createElement('h3');
+                var track_text = document.createElement('p');
+                
+                artist_text.appendChild(artist);
+                track_text.appendChild(track_name);
+                
+                listItem.appendChild(artist_text);
+                listItem.appendChild(track_text);
+                
+                listItem.classList.add('item');
+                listItem.dataset.index = x;
+                
+                document.getElementById('list').appendChild(listItem);
+            }
+            displayTrack(0);
+            
+            var listItems = document.querySelectorAll('.item');
+            listItems.forEach(el => {
+                el.onclick = () => {
+                    displayTrack(el.dataset.index);
+                };
+            });
+            
+            function displayTrack(x) {
+                var active = document.querySelector('.is-active');
+                if (active) {
+                    active.classList.remove('is-active'); 
+                }
+                var el = document.getElementById('list').children[x];
+                el.classList.add('is-active');
+                var s = src[x],
+                    artist = s[0],
+                    track = s[1],
+                    audio = s[2],
+                    img = s[3],
+                    number = parseInt(x) + 1;
+                document.getElementById('title').innerText = number + ": " + artist;
+                document.getElementById('song_title').innerText = track;
+                var albumArt = document.getElementById('art');
+                albumArt.src = img;
+                albumArt.alt = artist + " " + track;
+                document.getElementById('audio').src = audio;
+            }
+        });
+    </script>

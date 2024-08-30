@@ -2,14 +2,26 @@ from flask import Flask, render_template
 
 app = Flask(__name__)
 
-@app.route('/Blog', methods=['GET, POST'])
-def Blog():
+@app.route('/')
+def home():
+   return render_template('home.html')
+
+
+@app.route('/Blog')
+def blog():
     return render_template('Blog.html')
 
+@app.route('/gallery')
+def gallery():
+    return render_template('Gallery.html') 
 
-@app.route('/home')
-def home():
-    return render_template('home.html')
+@app.route('/contacts')
+def contacts():
+    return render_template('Contacts.html')  
+
+@app.route('/game')
+def game():
+    return render_template('Game.html')
 
 @app.route('/about')
 def about():
